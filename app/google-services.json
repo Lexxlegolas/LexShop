@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "325835537543",
+    "firebase_url": "https://lexshop-60797.firebaseio.com",
+    "project_id": "lexshop-60797",
+    "storage_bucket": "lexshop-60797.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:325835537543:android:3293087940f3ae16",
+        "android_client_info": {
+          "package_name": "com.example.lexshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "325835537543-6rt256rcn2ekeip50tc3765totv5e7mf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lexshop",
+            "certificate_hash": "74106637c092078ffa9c0149349c463f91d9b94d"
+          }
+        },
+        {
+          "client_id": "325835537543-agr85n26cjn25k1td1f3q6t6tjtdpon2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCJ3wjkt6yq1Z1-g6mEHZxIp8_opctezg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "325835537543-agr85n26cjn25k1td1f3q6t6tjtdpon2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
