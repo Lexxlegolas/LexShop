@@ -7,7 +7,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.example.lexshop.R
-import com.example.lexshop.home.AdminActivity
+import com.example.lexshop.admin.AdminActivity
+import com.example.lexshop.admin.AdminCategoryActivity
 import com.example.lexshop.home.HomeActivity
 import com.example.lexshop.model.Users
 import com.example.lexshop.prevalent.Prevalent
@@ -101,7 +102,7 @@ class LoginActivity : AppCompatActivity() {
                                Toast.makeText(this@LoginActivity,"Welcome Admin You Logged in Successfully",Toast.LENGTH_SHORT).show()
                                loadingBar!!.dismiss()
 
-                               val i = Intent(this@LoginActivity,AdminActivity::class.java)
+                               val i = Intent(this@LoginActivity, AdminCategoryActivity::class.java)
                                i.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                                startActivity(i)
                            }

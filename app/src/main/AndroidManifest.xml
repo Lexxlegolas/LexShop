@@ -9,7 +9,9 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".home.AdminActivity">
+        <activity android:name=".admin.AdminCategoryActivity">
+        </activity>
+        <activity android:name=".admin.AdminActivity">
         </activity>
         <activity android:name=".home.HomeActivity">
         </activity>
