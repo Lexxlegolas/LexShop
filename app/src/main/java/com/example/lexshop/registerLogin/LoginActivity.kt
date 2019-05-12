@@ -5,12 +5,14 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.CheckBox
 import android.widget.Toast
+import com.example.lexshop.MainActivity
 import com.example.lexshop.R
-import com.example.lexshop.admin.AdminActivity
 import com.example.lexshop.admin.AdminCategoryActivity
 import com.example.lexshop.home.HomeActivity
 import com.example.lexshop.model.Users
+import com.example.lexshop.prevalent.Prev
 import com.example.lexshop.prevalent.Prevalent
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -27,13 +29,15 @@ class LoginActivity : AppCompatActivity() {
         var parentDbName = "Users"
         var user :Users? = null
         var prevalent:Prevalent? = null
+        var chkBocksRememberMe:com.rey.material.widget.CheckBox? = null
+        val prev:Prev? = null
 
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
+        chkBocksRememberMe = findViewById(R.id.remember_me_chk)
         loadingBar = ProgressDialog(this)
         Paper.init(this)
 
@@ -79,12 +83,15 @@ class LoginActivity : AppCompatActivity() {
 
     private fun allowAccess(number:String,password:String)
     {
-
-        if(remember_me_chk.isChecked)
+        if (prev?.userPhonekey != null && prev?.userPasswordkey != null)
         {
-            Paper.book().write(prevalent!!.userPhoneKey,number)
-            Paper.book().write(prevalent!!.userPasswordKey,password)
+            if(remember_me_chk!!.isChecked)
+            {
+                Paper.book().write(prev?.userPhonekey,number)
+                Paper.book().write(prev?.userPasswordkey,password)
+            }
         }
+
 
         val ref= FirebaseDatabase.getInstance().getReference()
         ref.addListenerForSingleValueEvent(object : ValueEventListener{
@@ -111,8 +118,8 @@ class LoginActivity : AppCompatActivity() {
                                Toast.makeText(this@LoginActivity,"Logged in Successfully",Toast.LENGTH_SHORT).show()
                                loadingBar!!.dismiss()
 
-                               val i = Intent(this@LoginActivity,HomeActivity::class.java)
-                               i.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                               val i = Intent(this@LoginActivity, HomeActivity::class.java)
+                               prev?.currentOnlieUsers= user
                                startActivity(i)
                            }
                         }

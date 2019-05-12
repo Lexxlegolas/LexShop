@@ -9,11 +9,24 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity
+                android:name=".home.HomeActivity"
+                android:label="@string/title_activity_home"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+                android:name=".home.Load"
+                android:label="@string/title_activity_load"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+                android:name=".Team"
+                android:label="@string/title_activity_team"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity android:name=".admin.AdminCategoryActivity">
         </activity>
         <activity android:name=".admin.AdminActivity">
-        </activity>
-        <activity android:name=".home.HomeActivity">
         </activity>
         <activity android:name=".registerLogin.RegiserActivity">
         </activity>

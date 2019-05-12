@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
+import com.example.lexshop.admin.AdminCategoryActivity
 import com.example.lexshop.home.HomeActivity
 import com.example.lexshop.model.Users
+import com.example.lexshop.prevalent.Prev
 import com.example.lexshop.prevalent.Prevalent
 import com.example.lexshop.registerLogin.LoginActivity
 import com.example.lexshop.registerLogin.RegiserActivity
@@ -18,17 +20,20 @@ import com.google.firebase.database.ValueEventListener
 import io.paperdb.Paper
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity()
+{
     companion object
     {
         val prevalent:Prevalent? = null
+        val prev:Prev? = null
         var parentDbName = "Users"
         var user :Users? = null
 
     }
     private var loadingBar : ProgressDialog? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Paper.init(this)
@@ -43,24 +48,27 @@ class MainActivity : AppCompatActivity() {
             val i = Intent(this, RegiserActivity::class.java)
             startActivity(i)
         }
-
-        /* val PhoneKey = Paper.book().read<String>(prevalent!!.userPhoneKey)
-        val PasswordKey = Paper.book().read<String>(prevalent!!.userPasswordKey)
-
-        if (PhoneKey != "" && PasswordKey !="" )
+        if (prev?.userPhonekey != null && prev?.userPasswordkey != null)
         {
-            if (!TextUtils.isEmpty(PhoneKey) && !TextUtils.isEmpty(PhoneKey))
+            val UserPhoneKey:String = Paper.book().read(prev?.userPhonekey)
+            val UserPasswordKey:String = Paper.book().read(prev?.userPasswordkey)
+
+           if (UserPhoneKey !="" && UserPasswordKey !="")
             {
-                AllowAccess(PhoneKey,PasswordKey)
-                loadingBar!!.setTitle("Already Login in")
-                loadingBar!!.setMessage("Just a moment")
-                loadingBar!!.setCanceledOnTouchOutside(false)
-                loadingBar!!.show()
+                if (!TextUtils.isEmpty(UserPhoneKey) && !TextUtils.isEmpty(UserPasswordKey))
+                {
+                    loadingBar?.setTitle("Already Logged in")
+                    loadingBar?.setMessage("Just a moment")
+                    loadingBar?.setCanceledOnTouchOutside(false)
+                    loadingBar?.show()
+                    AllowAccess(UserPhoneKey,UserPasswordKey)
+                }
             }
         }
-    }*/
 
-        /*private fun AllowAccess(number: String, password: String)
+
+    }
+    private fun AllowAccess(number: String, password: String)
     {
         val ref= FirebaseDatabase.getInstance().getReference()
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -73,12 +81,24 @@ class MainActivity : AppCompatActivity() {
                     {
                         if (user?.password == password)
                         {
-                            Toast.makeText(this@MainActivity,"Logged in Successfully", Toast.LENGTH_SHORT).show()
-                            loadingBar!!.dismiss()
+                            if (parentDbName.equals("Admin"))
+                            {
+                                Toast.makeText(this@MainActivity,"Welcome Admin You Logged in Successfully", Toast.LENGTH_SHORT).show()
+                                loadingBar!!.dismiss()
 
-                            val i = Intent(this@MainActivity, HomeActivity::class.java)
-                            i.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-                            startActivity(i)
+                                val i = Intent(this@MainActivity, AdminCategoryActivity::class.java)
+                                i.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                startActivity(i)
+                            }
+                            else if (parentDbName.equals("Users"))
+                            {
+                                Toast.makeText(this@MainActivity,"Logged in Successfully", Toast.LENGTH_SHORT).show()
+                                loadingBar!!.dismiss()
+
+                                val i = Intent(this@MainActivity, HomeActivity::class.java)
+                                prev?.currentOnlieUsers= LoginActivity.user
+                                startActivity(i)
+                            }
                         }
                         else
                         {
@@ -99,6 +119,7 @@ class MainActivity : AppCompatActivity() {
 
             }
         })
-    }*/
+
     }
+
 }

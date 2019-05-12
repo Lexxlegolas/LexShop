@@ -1,6 +1,6 @@
 package com.example.lexshop.model
 
-class Users(val name : String, val password:String, val phone:String)
+class Users(var name : String, var password:String, var phone:String)
 {
 constructor():this("","","")
 }

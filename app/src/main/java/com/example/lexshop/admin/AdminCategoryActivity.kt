@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.lexshop.R
 import com.example.lexshop.registerLogin.LoginActivity
+import io.paperdb.Paper
 import kotlinx.android.synthetic.main.activity_admin_category.*
 
 class AdminCategoryActivity : AppCompatActivity() {
@@ -12,6 +13,7 @@ class AdminCategoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_category)
+        Paper.init(this)
 
         t_shirt.setOnClickListener {
             val i = Intent(this,AdminActivity::class.java)
@@ -86,8 +88,11 @@ class AdminCategoryActivity : AppCompatActivity() {
         }
 
         back.setOnClickListener {
+            Paper.book().destroy()
             val i  = Intent(this,LoginActivity::class.java)
+            i.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(i)
+            finish()
         }
     }
 }
